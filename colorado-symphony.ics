@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Michael Westwind//Colorado Symphony//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Colorado Symphony
+X-WR-TIMEZONE:America/Denver
+
+BEGIN:VEVENT
+UID:colorado-symphony-placeholder-1
+DTSTAMP:20260518T160000Z
+DTSTART:20260520T013000Z
+DTEND:20260520T040000Z
+SUMMARY:Colorado Symphony Placeholder Event
+DESCRIPTION:Initial placeholder event while live feed automation is configured.
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+END:VEVENT
+
+END:VCALENDAR
