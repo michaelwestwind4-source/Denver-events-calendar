@@ -1,0 +1,19 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Michael Westwind//Dazzle Jazz//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Dazzle Jazz
+X-WR-TIMEZONE:America/Denver
+
+BEGIN:VEVENT
+UID:dazzle-jazz-placeholder-1
+DTSTAMP:20260518T160000Z
+DTSTART:20260521T010000Z
+DTEND:20260521T030000Z
+SUMMARY:Dazzle Jazz Placeholder Event
+DESCRIPTION:Initial placeholder event while live feed automation is configured. Filters planned: straight-ahead jazz, Dave Corbus, Nelson Rangell, Dotsero, and national/touring acts.
+LOCATION:Dazzle Denver, Denver, CO
+END:VEVENT
+
+END:VCALENDAR
