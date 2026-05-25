@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
+
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
+import html
 import re
 import uuid
-import html
+
 import requests
 from bs4 import BeautifulSoup
 from dateutil import parser
-from datetime import datetime, timedelta, timezone
-from zoneinfo import ZoneInfo
 
 TZ = ZoneInfo("America/Denver")
 
@@ -20,79 +22,183 @@ DAZZLE_URLS = [
     "https://www.dazzledenver.com/live-music/touring-shows/",
 ]
 
-DAZZLE_INCLUDE_TERMS = [
-    "straight-ahead",
-    "straight ahead",
-    "jazz",
-    "dave corbus",
-    "nelson rangell",
-    "dotsero",
-    "touring",
-    "national",
+DAZZLE_ARTISTS = [
+    "Dave Corbus",
+    "Nelson Rangell",
+    "Dotsero",
 ]
 
-def clean(s):
-    return re.sub(r"\s+", " ", html.unescape(s or "")).strip()
+DAZZLE_STYLE_TERMS = [
+    "straight-ahead",
+    "straight ahead",
+    "bebop",
+    "hard bop",
+    "post-bop",
+    "mainstream jazz",
+    "jazz quartet",
+    "jazz trio",
+    "jazz quintet",
+]
 
-def esc(s):
-    return clean(s).replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\n", "\\n")
+DAZZLE_NATIONAL_TERMS = [
+    "national",
+    "touring",
+    "grammy",
+    "internationally",
+]
+
+HEADERS = {
+    "User-Agent": "Mozilla/5.0"
+}
+
+
+def clean(text):
+    return re.sub(r"\s+", " ", html.unescape(text or "")).strip()
+
+
+def esc(text):
+    return (
+        clean(text)
+        .replace("\\", "\\\\")
+        .replace(",", "\\,")
+        .replace(";", "\\;")
+        .replace("\n", "\\n")
+    )
+
 
 def fetch(url):
-    r = requests.get(url, timeout=30, headers={"User-Agent": "Mozilla/5.0"})
-    r.raise_for_status()
-    return r.text
+    response = requests.get(url, timeout=30, headers=HEADERS)
+    response.raise_for_status()
+    return response.text
 
-def find_events_from_page(url, source_name, location, filter_terms=None):
+
+def looks_like_event_text(text):
+    return (
+        len(text) > 25
+        and re.search(
+            r"\b(2026|2027|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|"
+            r"\d{1,2}:\d{2}|AM|PM)\b",
+            text,
+            re.I,
+        )
+    )
+
+
+def extract_candidate_blocks(url):
     soup = BeautifulSoup(fetch(url), "html.parser")
-    text_blocks = []
+    blocks = []
 
-    for tag in soup.find_all(["article", "li", "div", "section"]):
-        txt = clean(tag.get_text(" "))
-        if len(txt) > 20 and re.search(r"\b(2026|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec|\d{1,2}:\d{2})\b", txt, re.I):
-            text_blocks.append(txt)
+    for tag in soup.find_all(["article", "li", "section", "div"]):
+        text = clean(tag.get_text(" "))
+        if looks_like_event_text(text):
+            blocks.append(text)
 
+    seen = set()
+    unique = []
+
+    for block in blocks:
+        key = block[:250].lower()
+        if key not in seen:
+            seen.add(key)
+            unique.append(block)
+
+    return unique
+
+
+def parse_event_datetime(text):
+    try:
+        dt = parser.parse(text, fuzzy=True, default=datetime.now(TZ))
+    except Exception:
+        return None
+
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=TZ)
+
+    return dt
+
+
+def make_title(text):
+    title = text[:140]
+    title = re.sub(
+        r"\b(Get Tickets|Buy Tickets|Tickets|View Event|Learn More)\b.*",
+        "",
+        title,
+        flags=re.I,
+    )
+    return clean(title)[:120]
+
+
+def block_matches_dazzle_filter(block):
+    lower = block.lower()
+
+    artist_match = any(
+        artist.lower() in lower for artist in DAZZLE_ARTISTS
+    )
+
+    style_match = any(
+        term.lower() in lower for term in DAZZLE_STYLE_TERMS
+    )
+
+    national_match = any(
+        term.lower() in lower for term in DAZZLE_NATIONAL_TERMS
+    )
+
+    return artist_match or style_match or national_match
+
+
+def find_events(urls, source_name, location, filter_func=None):
     events = []
     seen = set()
 
-    for block in text_blocks:
-        lower = block.lower()
-        if filter_terms and not any(term in lower for term in filter_terms):
-            continue
-
+    for url in urls:
         try:
-            dt = parser.parse(block, fuzzy=True, default=datetime.now(TZ))
-        except Exception:
+            blocks = extract_candidate_blocks(url)
+        except Exception as exc:
+            print(f"Fetch failed for {url}: {exc}")
             continue
 
-        if dt.year < datetime.now(TZ).year:
-            continue
+        for block in blocks:
 
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=TZ)
+            if filter_func and not filter_func(block):
+                continue
 
-        title = block[:110]
-        title = re.sub(r"\b(Get Tickets|Buy Tickets|View Event|Learn More)\b.*", "", title, flags=re.I)
-        title = clean(title)
+            dt = parse_event_datetime(block)
 
-        key = (title.lower(), dt.isoformat())
-        if key in seen:
-            continue
-        seen.add(key)
+            if not dt:
+                continue
 
-        events.append({
-            "title": title,
-            "start": dt,
-            "end": dt + timedelta(hours=2),
-            "location": location,
-            "description": f"Source: {url}",
-            "url": url,
-            "source": source_name,
-        })
+            title = make_title(block)
+
+            key = (
+                source_name.lower(),
+                title.lower(),
+                dt.isoformat(),
+            )
+
+            if key in seen:
+                continue
+
+            seen.add(key)
+
+            events.append(
+                {
+                    "title": title,
+                    "start": dt,
+                    "end": dt + timedelta(hours=2),
+                    "location": location,
+                    "description": f"{source_name}. Source: {url}",
+                    "url": url,
+                    "source": source_name,
+                }
+            )
 
     return events
 
+
 def make_calendar(name, events):
+
     now = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
     lines = [
         "BEGIN:VCALENDAR",
         "VERSION:2.0",
@@ -103,81 +209,111 @@ def make_calendar(name, events):
         "X-WR-TIMEZONE:America/Denver",
     ]
 
-    for e in sorted(events, key=lambda x: x["start"]):
-        uid = str(uuid.uuid5(uuid.NAMESPACE_URL, e["source"] + e["title"] + e["start"].isoformat()))
-        start = e["start"].astimezone(TZ).strftime("%Y%m%dT%H%M%S")
-        end = e["end"].astimezone(TZ).strftime("%Y%m%dT%H%M%S")
+    for event in sorted(events, key=lambda e: e["start"]):
 
-        lines += [
-            "BEGIN:VEVENT",
-            f"UID:{uid}",
-            f"DTSTAMP:{now}",
-            f"DTSTART;TZID=America/Denver:{start}",
-            f"DTEND;TZID=America/Denver:{end}",
-            f"SUMMARY:{esc(e['title'])}",
-            f"DESCRIPTION:{esc(e['description'])}",
-            f"LOCATION:{esc(e['location'])}",
-            f"URL:{e['url']}",
-            "END:VEVENT",
-        ]
+        uid = str(
+            uuid.uuid5(
+                uuid.NAMESPACE_URL,
+                event["source"]
+                + event["title"]
+                + event["start"].isoformat(),
+            )
+        )
+
+        start = event["start"].astimezone(TZ).strftime("%Y%m%dT%H%M%S")
+        end = event["end"].astimezone(TZ).strftime("%Y%m%dT%H%M%S")
+
+        lines.extend(
+            [
+                "BEGIN:VEVENT",
+                f"UID:{uid}",
+                f"DTSTAMP:{now}",
+                f"DTSTART;TZID=America/Denver:{start}",
+                f"DTEND;TZID=America/Denver:{end}",
+                f"SUMMARY:{esc(event['title'])}",
+                f"DESCRIPTION:{esc(event['description'])}",
+                f"LOCATION:{esc(event['location'])}",
+                f"URL:{event['url']}",
+                "END:VEVENT",
+            ]
+        )
 
     lines.append("END:VCALENDAR")
+
     return "\n".join(lines) + "\n"
 
+
 def main():
-    symphony_events = []
-    for url in SYMPHONY_URLS:
-        try:
-            symphony_events += find_events_from_page(
-                url,
+
+    symphony_events = find_events(
+        SYMPHONY_URLS,
+        "Colorado Symphony",
+        "Boettcher Concert Hall, Denver, CO",
+    )
+
+    dazzle_events = find_events(
+        DAZZLE_URLS,
+        "Dazzle Jazz",
+        "Dazzle Denver, Denver, CO",
+        filter_func=block_matches_dazzle_filter,
+    )
+
+    entertainment_events = (
+        symphony_events + dazzle_events
+    )
+
+    with open(
+        "colorado-symphony.ics",
+        "w",
+        encoding="utf-8",
+    ) as file:
+
+        file.write(
+            make_calendar(
                 "Colorado Symphony",
-                "Boettcher Concert Hall, Denver, CO"
+                symphony_events,
             )
-        except Exception as ex:
-            print(f"Symphony fetch failed for {url}: {ex}")
+        )
 
-    dazzle_events = []
-    for url in DAZZLE_URLS:
-        try:
-            dazzle_events += find_events_from_page(
-                url,
+    with open(
+        "dazzle-jazz.ics",
+        "w",
+        encoding="utf-8",
+    ) as file:
+
+        file.write(
+            make_calendar(
                 "Dazzle Jazz",
-                "Dazzle Denver, Denver, CO",
-                DAZZLE_INCLUDE_TERMS
+                dazzle_events,
             )
-        except Exception as ex:
-            print(f"Dazzle fetch failed for {url}: {ex}")
+        )
 
-    if not symphony_events:
-        symphony_events = [{
-            "title": "Colorado Symphony calendar update found no events",
-            "start": datetime.now(TZ) + timedelta(days=1),
-            "end": datetime.now(TZ) + timedelta(days=1, hours=1),
-            "location": "Denver, CO",
-            "description": "The updater ran but found no parseable events.",
-            "url": SYMPHONY_URLS[0],
-            "source": "Colorado Symphony",
-        }]
+    with open(
+        "entertainment.ics",
+        "w",
+        encoding="utf-8",
+    ) as file:
 
-    if not dazzle_events:
-        dazzle_events = [{
-            "title": "Dazzle calendar update found no matching events",
-            "start": datetime.now(TZ) + timedelta(days=1),
-            "end": datetime.now(TZ) + timedelta(days=1, hours=1),
-            "location": "Dazzle Denver, Denver, CO",
-            "description": "The updater ran but found no matching filtered events.",
-            "url": DAZZLE_URLS[0],
-            "source": "Dazzle Jazz",
-        }]
+        file.write(
+            make_calendar(
+                "Entertainment",
+                entertainment_events,
+            )
+        )
 
-    with open("colorado-symphony.ics", "w", encoding="utf-8") as f:
-        f.write(make_calendar("Colorado Symphony", symphony_events))
+    print(
+        f"Wrote {len(symphony_events)} Symphony events"
+    )
 
-    with open("dazzle-jazz.ics", "w", encoding="utf-8") as f:
-        f.write(make_calendar("Dazzle Jazz", dazzle_events))
+    print(
+        f"Wrote {len(dazzle_events)} Dazzle events"
+    )
 
-    print(f"Wrote {len(symphony_events)} Symphony events")
-    print(f"Wrote {len(dazzle_events)} Dazzle events")
+    print(
+        f"Wrote {len(entertainment_events)} Entertainment events"
+    )
+
 
 if __name__ == "__main__":
     main()
+
