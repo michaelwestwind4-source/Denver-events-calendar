@@ -1,7 +1,12 @@
 name: Update event calendars
 
 "on":
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+  workflow_dispatch: {}
+
   schedule:
     - cron: "15 10 * * *"
 
