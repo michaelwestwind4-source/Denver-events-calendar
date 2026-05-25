@@ -146,6 +146,79 @@ def block_matches_dazzle_filter(block):
     return artist_match or style_match or national_match
 
 
+
+def find_symphony_events():
+    events = []
+    seen = set()
+
+    soup = BeautifulSoup(fetch("https://coloradosymphony.org/calendar/"), "html.parser")
+    text = soup.get_text("\n")
+    lines = [clean(line) for line in text.splitlines()]
+    lines = [line for line in lines if line]
+
+    current_date = None
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        date_match = re.match(
+            r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
+            r"(January|February|March|April|May|June|July|August|September|October|November|December) "
+            r"(\d{1,2})$",
+            line,
+        )
+
+        if date_match:
+            current_date = line
+            i += 1
+            continue
+
+        if current_date and i + 1 < len(lines):
+            title = line
+            time_line = lines[i + 1]
+
+            if re.match(r"^\d{1,2}:\d{2} (AM|PM)$", time_line, re.I):
+                try:
+                    dt = parser.parse(
+                        f"{current_date} 2026 {time_line}",
+                        fuzzy=False,
+                    )
+                except Exception:
+                    i += 1
+                    continue
+
+                dt = dt.replace(tzinfo=TZ)
+
+                if title.lower() not in {
+                    "buy tickets",
+                    "calendar",
+                    "list view",
+                    "all events",
+                }:
+                    key = (title.lower(), dt.isoformat())
+                    if key not in seen:
+                        seen.add(key)
+                        events.append(
+                            {
+                                "title": title,
+                                "start": dt,
+                                "end": dt + timedelta(hours=2),
+                                "location": "Boettcher Concert Hall, Denver, CO",
+                                "description": "Colorado Symphony. Source: https://coloradosymphony.org/calendar/",
+                                "url": "https://coloradosymphony.org/calendar/",
+                                "source": "Colorado Symphony",
+                            }
+                        )
+
+                i += 2
+                continue
+
+        i += 1
+
+    return events
+
+
 def find_events(urls, source_name, location, filter_func=None):
     events = []
     seen = set()
@@ -193,7 +266,6 @@ def find_events(urls, source_name, location, filter_func=None):
             )
 
     return events
-
 
 def make_calendar(name, events):
 
@@ -245,11 +317,7 @@ def make_calendar(name, events):
 
 def main():
 
-    symphony_events = find_events(
-        SYMPHONY_URLS,
-        "Colorado Symphony",
-        "Boettcher Concert Hall, Denver, CO",
-    )
+    symphony_events = find_symphony_events()
 
     dazzle_events = find_events(
         DAZZLE_URLS,
