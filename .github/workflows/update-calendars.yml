@@ -34,6 +34,6 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
-          git add colorado-symphony.ics dazzle-jazz.ics
+          git add colorado-symphony.ics dazzle-jazz.ics entertainment.ics
           git commit -m "Update event calendars" || echo "No changes"
           git push
