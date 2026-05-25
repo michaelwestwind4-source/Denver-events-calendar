@@ -1,9 +1,9 @@
 BEGIN:VCALENDAR
 VERSION:2.0
-PRODID:-//Michael Westwind//Colorado Symphony//EN
+PRODID:-//Michael Westwind//Entertainment//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Colorado Symphony
+X-WR-CALNAME:Entertainment
 X-WR-TIMEZONE:America/Denver
 BEGIN:VEVENT
 UID:40d240aa-2223-5df3-893f-895feb62b3f1
