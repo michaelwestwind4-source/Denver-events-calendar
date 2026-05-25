@@ -5,15 +5,14 @@ CALSCALE:GREGORIAN
 METHOD:PUBLISH
 X-WR-CALNAME:Dazzle Jazz
 X-WR-TIMEZONE:America/Denver
-
 BEGIN:VEVENT
-UID:dazzle-jazz-placeholder-1
-DTSTAMP:20260518T160000Z
-DTSTART:20260521T010000Z
-DTEND:20260521T030000Z
-SUMMARY:Dazzle Jazz Placeholder Event
-DESCRIPTION:Initial placeholder event while live feed automation is configured. Filters planned: straight-ahead jazz, Dave Corbus, Nelson Rangell, Dotsero, and national/touring acts.
-LOCATION:Dazzle Denver, Denver, CO
+UID:f7fa0958-d204-53fa-8900-b93b849198a8
+DTSTAMP:20260525T173959Z
+DTSTART;TZID=America/Denver:20260526T113959
+DTEND;TZID=America/Denver:20260526T123959
+SUMMARY:Dazzle calendar update found no matching events
+DESCRIPTION:The updater ran but found no matching filtered events.
+LOCATION:Dazzle Denver\, Denver\, CO
+URL:https://www.dazzledenver.com/
 END:VEVENT
-
 END:VCALENDAR
