@@ -151,70 +151,90 @@ def find_symphony_events():
     events = []
     seen = set()
 
-    soup = BeautifulSoup(fetch("https://coloradosymphony.org/calendar/"), "html.parser")
-    text = soup.get_text("\n")
-    lines = [clean(line) for line in text.splitlines()]
+    url = "https://coloradosymphony.org/calendar/"
+    soup = BeautifulSoup(fetch(url), "html.parser")
+
+    lines = [clean(line) for line in soup.get_text("\n").splitlines()]
     lines = [line for line in lines if line]
 
+    date_re = re.compile(
+        r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
+        r"(January|February|March|April|May|June|July|August|September|October|November|December) "
+        r"(\d{1,2})$"
+    )
+
+    time_re = re.compile(r"^\d{1,2}:\d{2} (AM|PM)$", re.I)
+
+    skip_titles = {
+        "buy tickets",
+        "calendar",
+        "list view",
+        "all events",
+        "movie",
+        "classics",
+        "young professionals",
+        "fundraising events",
+        "summer",
+        "spotlight",
+        "family-friendly",
+    }
+
     current_date = None
-    i = 0
+    pending_title = None
 
-    while i < len(lines):
-        line = lines[i]
-
-        date_match = re.match(
-            r"^(Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday), "
-            r"(January|February|March|April|May|June|July|August|September|October|November|December) "
-            r"(\d{1,2})$",
-            line,
-        )
-
-        if date_match:
+    for line in lines:
+        if date_re.match(line):
             current_date = line
-            i += 1
+            pending_title = None
             continue
 
-        if current_date and i + 1 < len(lines):
-            title = line
-            time_line = lines[i + 1]
+        # A bare day number means we have left the previous date cell.
+        if re.match(r"^\d{1,2}$", line):
+            current_date = None
+            pending_title = None
+            continue
 
-            if re.match(r"^\d{1,2}:\d{2} (AM|PM)$", time_line, re.I):
+        if not current_date:
+            continue
+
+        if time_re.match(line):
+            if pending_title:
                 try:
-                    dt = parser.parse(
-                        f"{current_date} 2026 {time_line}",
-                        fuzzy=False,
-                    )
+                    dt = parser.parse(f"{current_date} 2026 {line}", fuzzy=False)
                 except Exception:
-                    i += 1
+                    pending_title = None
                     continue
 
                 dt = dt.replace(tzinfo=TZ)
 
-                if title.lower() not in {
-                    "buy tickets",
-                    "calendar",
-                    "list view",
-                    "all events",
-                }:
-                    key = (title.lower(), dt.isoformat())
-                    if key not in seen:
-                        seen.add(key)
-                        events.append(
-                            {
-                                "title": title,
-                                "start": dt,
-                                "end": dt + timedelta(hours=2),
-                                "location": "Boettcher Concert Hall, Denver, CO",
-                                "description": "Colorado Symphony. Source: https://coloradosymphony.org/calendar/",
-                                "url": "https://coloradosymphony.org/calendar/",
-                                "source": "Colorado Symphony",
-                            }
-                        )
+                key = (pending_title.lower(), dt.isoformat())
+                if key not in seen:
+                    seen.add(key)
+                    events.append(
+                        {
+                            "title": pending_title,
+                            "start": dt,
+                            "end": dt + timedelta(hours=2),
+                            "location": "Boettcher Concert Hall, Denver, CO",
+                            "description": f"Colorado Symphony. Source: {url}",
+                            "url": url,
+                            "source": "Colorado Symphony",
+                        }
+                    )
 
-                i += 2
-                continue
+                pending_title = None
 
-        i += 1
+            continue
+
+        if line.lower() in skip_titles:
+            continue
+
+        # Ignore very short noise lines.
+        if len(line) < 4:
+            continue
+
+        # Treat the first non-noise line after a valid date as the event title.
+        pending_title = line
 
     return events
 
