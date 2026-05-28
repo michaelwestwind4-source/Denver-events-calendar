@@ -7,7 +7,7 @@ X-WR-CALNAME:Colorado Symphony
 X-WR-TIMEZONE:America/Denver
 BEGIN:VEVENT
 UID:25c09f5c-de28-58fd-851c-f385a964444c
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260426T130000
 DTEND;TZID=America/Denver:20260426T150000
 SUMMARY:Gershwin Rhapsody in Blue with Peter Oundjian & Michelle Cann
@@ -17,7 +17,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:e8008118-3f4b-56ce-b32d-bf0170f09b5f
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260501T193000
 DTEND;TZID=America/Denver:20260501T213000
 SUMMARY:Stravinsky The Rite of Spring with Kevin John Edusei + Jess Gillam
@@ -27,7 +27,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:2037c90a-a959-5dc2-84ae-f64998df106e
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260502T193000
 DTEND;TZID=America/Denver:20260502T213000
 SUMMARY:Stravinsky The Rite of Spring with Kevin John Edusei + Jess Gillam
@@ -37,7 +37,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:cdd0d711-7f28-54f3-b74f-dbbc2e64c928
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260503T130000
 DTEND;TZID=America/Denver:20260503T150000
 SUMMARY:Stravinsky The Rite of Spring with Kevin John Edusei + Jess Gillam
@@ -47,7 +47,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:bc5c65e8-7417-5198-bd69-e275fe75a048
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260507T193000
 DTEND;TZID=America/Denver:20260507T213000
 SUMMARY:Music and Art: A Symphonic Exploration
@@ -57,7 +57,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:ac9c0526-9bd0-59a5-af81-6f79cb5024ba
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260509T180000
 DTEND;TZID=America/Denver:20260509T200000
 SUMMARY:Colorado Symphony Gala
@@ -67,7 +67,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:0c54e9db-54cb-5a81-8f36-09f4000d9a48
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260509T200000
 DTEND;TZID=America/Denver:20260509T220000
 SUMMARY:An Evening with Jon Batiste and the Colorado Symphony - Benefit Concert
@@ -77,7 +77,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:c7c6c21d-1f03-55d8-a0d3-1d24cc7bdf9a
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260510T143000
 DTEND;TZID=America/Denver:20260510T163000
 SUMMARY:DYAO Presents: Electric Beauty
@@ -87,7 +87,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:e500fe82-a912-519a-aab9-b789882530f5
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260515T193000
 DTEND;TZID=America/Denver:20260515T213000
 SUMMARY:Pictures at an Exhibition with Christopher Dragon + Albert Cano Smit
@@ -97,7 +97,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:742beb51-5f60-5b52-89f1-e5e114ed8083
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260516T193000
 DTEND;TZID=America/Denver:20260516T213000
 SUMMARY:Pictures at an Exhibition with Christopher Dragon + Albert Cano Smit
@@ -107,7 +107,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:7f34877c-0aff-510c-842d-3f8d07d6e71e
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260517T130000
 DTEND;TZID=America/Denver:20260517T150000
 SUMMARY:Pictures at an Exhibition with Christopher Dragon + Albert Cano Smit
@@ -117,7 +117,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:94066521-3a7d-53a8-90be-5c4dd4c73095
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260522T193000
 DTEND;TZID=America/Denver:20260522T213000
 SUMMARY:Star Wars: Return of the Jedi in Concert
@@ -127,7 +127,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:aba13818-8d1a-5740-9964-819427f73fc5
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260523T193000
 DTEND;TZID=America/Denver:20260523T213000
 SUMMARY:Star Wars: Return of the Jedi in Concert
@@ -137,7 +137,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:61732b2f-d59c-5b80-b371-e1030d4a4c3e
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260524T143000
 DTEND;TZID=America/Denver:20260524T163000
 SUMMARY:Star Wars: Return of the Jedi in Concert
@@ -147,7 +147,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:8a8ac502-b970-5f63-bff0-30c8b7e77040
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260529T193000
 DTEND;TZID=America/Denver:20260529T213000
 SUMMARY:Mahler's Second with Peter Oundjian & your Colorado Symphony Chorus
@@ -157,7 +157,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:baffaabe-b914-5af9-a6c6-05dcec840a1f
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260530T193000
 DTEND;TZID=America/Denver:20260530T213000
 SUMMARY:Mahler's Second with Peter Oundjian & your Colorado Symphony Chorus
@@ -167,7 +167,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:8268dd16-b442-586e-92a5-b7009f4a20bb
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260531T130000
 DTEND;TZID=America/Denver:20260531T150000
 SUMMARY:Mahler's Second with Peter Oundjian & your Colorado Symphony Chorus
@@ -177,7 +177,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:cdd29cb1-45ba-5914-9c76-d93c0953403e
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260603T193000
 DTEND;TZID=America/Denver:20260603T213000
 SUMMARY:Yo-Yo Ma with the Colorado Symphony at Red Rocks Amphitheatre
@@ -187,7 +187,7 @@ URL:https://coloradosymphony.org/calendar/
 END:VEVENT
 BEGIN:VEVENT
 UID:3426d642-a8a6-51d1-8578-0cb09a2b0c1c
-DTSTAMP:20260527T183722Z
+DTSTAMP:20260528T194558Z
 DTSTART;TZID=America/Denver:20260605T193000
 DTEND;TZID=America/Denver:20260605T213000
 SUMMARY:Yo-Yo Ma with the Colorado Symphony at Ford Amphitheater
