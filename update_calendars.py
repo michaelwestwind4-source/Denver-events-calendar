@@ -165,76 +165,49 @@ def find_symphony_events():
 
     time_re = re.compile(r"^\d{1,2}:\d{2} (AM|PM)$", re.I)
 
-    skip_titles = {
-        "buy tickets",
-        "calendar",
-        "list view",
-        "all events",
-        "movie",
-        "classics",
-        "young professionals",
-        "fundraising events",
-        "summer",
-        "spotlight",
-        "family-friendly",
-    }
-
     current_date = None
-    pending_title = None
+    i = 0
 
-    for line in lines:
+    while i < len(lines):
+        line = lines[i]
+
         if date_re.match(line):
             current_date = line
-            pending_title = None
+            i += 1
             continue
 
-        # A bare day number means we have left the previous date cell.
-        if re.match(r"^\d{1,2}$", line):
-            current_date = None
-            pending_title = None
-            continue
+        if current_date and i + 1 < len(lines) and time_re.match(lines[i + 1]):
+            title = line
+            time_line = lines[i + 1]
 
-        if not current_date:
-            continue
-
-        if time_re.match(line):
-            if pending_title:
+            if title.lower() not in {"buy tickets", "calendar", "list view"}:
                 try:
-                    dt = parser.parse(f"{current_date} 2026 {line}", fuzzy=False)
+                    dt = parser.parse(f"{current_date} 2026 {time_line}", fuzzy=False)
                 except Exception:
-                    pending_title = None
+                    i += 2
                     continue
 
                 dt = dt.replace(tzinfo=TZ)
 
-                key = (pending_title.lower(), dt.isoformat())
+                key = (title.lower(), dt.isoformat())
+
                 if key not in seen:
                     seen.add(key)
-                    events.append(
-                        {
-                            "title": pending_title,
-                            "start": dt,
-                            "end": dt + timedelta(hours=2),
-                            "location": "Boettcher Concert Hall, Denver, CO",
-                            "description": f"Colorado Symphony. Source: {url}",
-                            "url": url,
-                            "source": "Colorado Symphony",
-                        }
-                    )
 
-                pending_title = None
+                    events.append({
+                        "title": title,
+                        "start": dt,
+                        "end": dt + timedelta(hours=2),
+                        "location": "Boettcher Concert Hall, Denver, CO",
+                        "description": f"Colorado Symphony. Source: {url}",
+                        "url": url,
+                        "source": "Colorado Symphony",
+                    })
 
+            i += 2
             continue
 
-        if line.lower() in skip_titles:
-            continue
-
-        # Ignore very short noise lines.
-        if len(line) < 4:
-            continue
-
-        # Treat the first non-noise line after a valid date as the event title.
-        pending_title = line
+        i += 1
 
     return events
 
