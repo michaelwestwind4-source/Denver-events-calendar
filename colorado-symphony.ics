@@ -6,91 +6,131 @@ METHOD:PUBLISH
 X-WR-CALNAME:Colorado Symphony
 X-WR-TIMEZONE:America/Denver
 BEGIN:VEVENT
-UID:8268dd16-b442-586e-92a5-b7009f4a20bb
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260531T130000
-DTEND;TZID=America/Denver:20260531T150000
-SUMMARY:Mahler's Second with Peter Oundjian & your Colorado Symphony Chorus
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:cdd29cb1-45ba-5914-9c76-d93c0953403e
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260603T193000
-DTEND;TZID=America/Denver:20260603T213000
-SUMMARY:Yo-Yo Ma with the Colorado Symphony at Red Rocks Amphitheatre
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:3426d642-a8a6-51d1-8578-0cb09a2b0c1c
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260605T193000
-DTEND;TZID=America/Denver:20260605T213000
-SUMMARY:Yo-Yo Ma with the Colorado Symphony at Ford Amphitheater
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:94965d5f-5f80-5367-8acb-07873b1f138b
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260607T193000
-DTEND;TZID=America/Denver:20260607T213000
-SUMMARY:Trey Anastasio with the Colorado Symphony at Red Rocks Amphitheatre
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:b3ddab43-e34b-57f6-8d6f-d0a16df1ea65
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260620T190000
-DTEND;TZID=America/Denver:20260620T210000
-SUMMARY:Harry Potter and the Sorcerer's Stone™ in Concert
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:4a9e32bb-3617-5873-bfea-a7ca37d63c1d
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260621T143000
-DTEND;TZID=America/Denver:20260621T163000
-SUMMARY:Harry Potter and the Sorcerer's Stone™ in Concert
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:b243d0fc-f044-5d1e-9f64-28b5c912d16d
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260626T193000
-DTEND;TZID=America/Denver:20260626T213000
-SUMMARY:Distant Worlds: music from FINAL FANTASY
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
-UID:d429ab6c-87d3-5875-b114-9910429ff39e
-DTSTAMP:20260630T122313Z
-DTSTART;TZID=America/Denver:20260627T193000
-DTEND;TZID=America/Denver:20260627T213000
-SUMMARY:Distant Worlds: music from FINAL FANTASY
-DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
-LOCATION:Boettcher Concert Hall\, Denver\, CO
-URL:https://coloradosymphony.org/calendar/
-END:VEVENT
-BEGIN:VEVENT
 UID:e3cebae7-9714-5af1-a2a4-8b8f505e999a
-DTSTAMP:20260630T122313Z
+DTSTAMP:20260701T124622Z
 DTSTART;TZID=America/Denver:20260703T180000
 DTEND;TZID=America/Denver:20260703T200000
 SUMMARY:Independence Eve: A Free Concert Presented by CU Anschutz
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:b2b4ac90-91bc-5af6-8d1c-bfc5d8490ab6
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260705T193000
+DTEND;TZID=America/Denver:20260705T213000
+SUMMARY:Andrea Gibson: Love Letter from the Afterlife
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:dd06f581-3ab1-5a12-b969-f89fcc0feb5e
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260707T193000
+DTEND;TZID=America/Denver:20260707T213000
+SUMMARY:Wynton Marsalis Septet at the Buell Theatre
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:61568c54-ef74-5d7b-82f9-5f96cc4097a8
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260710T193000
+DTEND;TZID=America/Denver:20260710T213000
+SUMMARY:A Tribute to Arthur Fiedler and the Boston Pops at the Arvada Center
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:dc25279d-c241-535f-b347-e726ae248ac1
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260712T143000
+DTEND;TZID=America/Denver:20260712T163000
+SUMMARY:Season Preview Presented by CPR Classical
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:e9eb9c3c-96e0-5e40-b98e-fee5099ae126
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260715T193000
+DTEND;TZID=America/Denver:20260715T213000
+SUMMARY:The Head and the Heart with the Colorado Symphony
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:b34a92fa-b98b-55c8-848d-15597463b66f
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260719T193000
+DTEND;TZID=America/Denver:20260719T213000
+SUMMARY:Maren Morris joined by The Highwomen with the Colorado Symphony and special guest Brittney Spencer
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:426889dc-f3be-5af9-9638-3a0f062d41f8
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260721T193000
+DTEND;TZID=America/Denver:20260721T213000
+SUMMARY:Colorado Symphony performs the Music of Hans Zimmer & John Williams
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:961cd540-e43b-5f68-98ee-40faab6cd810
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260725T193000
+DTEND;TZID=America/Denver:20260725T213000
+SUMMARY:Disney’s Pirates of the Caribbean: The Curse of the Black Pearl in Concert
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:c9ffb6a3-0d86-546f-9291-94b6f0a45544
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260726T143000
+DTEND;TZID=America/Denver:20260726T163000
+SUMMARY:Disney’s Pirates of the Caribbean: The Curse of the Black Pearl in Concert
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:ca4c0efd-665c-55d5-b614-ea83d325c06f
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260729T190000
+DTEND;TZID=America/Denver:20260729T210000
+SUMMARY:Mozart at The Studio Loft
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:aaaff2cb-b297-590a-8e4b-3def50d21d81
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260730T190000
+DTEND;TZID=America/Denver:20260730T210000
+SUMMARY:Mozart at The Studio Loft
+DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
+LOCATION:Boettcher Concert Hall\, Denver\, CO
+URL:https://coloradosymphony.org/calendar/
+END:VEVENT
+BEGIN:VEVENT
+UID:bb725568-d83f-507b-b9e1-d88f1e554c53
+DTSTAMP:20260701T124622Z
+DTSTART;TZID=America/Denver:20260731T193000
+DTEND;TZID=America/Denver:20260731T213000
+SUMMARY:Mozart Under Moonlight at the Arvada Center
 DESCRIPTION:Colorado Symphony. Source: https://coloradosymphony.org/calendar/
 LOCATION:Boettcher Concert Hall\, Denver\, CO
 URL:https://coloradosymphony.org/calendar/
